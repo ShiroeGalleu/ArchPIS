@@ -1,25 +1,26 @@
 #!/bin/bash
-#v0.1
+#v0.2
 
-#add multilib and update the packages
+#intro
+clear
+echo "welcome to Shrioe Galleu ArchPIS (Arch Post Install Script)"
+sleep 2
+clear
+echo "multilib and git is required to use this script and will be install if you continue"
+sleep 2
+clear
+
+#enable multilib and install git
 while true; do
-    read -p "Do you wish enable multilib? This will also run -Syu Required [y/n] " yn
+    read -p "Do you wish enable multilib, and install git? This will also run -Syu (Required) [y/n] " yn
     case $yn in
-        [Yy]* ) sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf && sudo pacman -Syu; break;;
+        [Yy]* ) sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf && sudo pacman -Syu git; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
-#add git
-while true; do
-    read -p "Do you wish to install git? Required [y/n]" yn
-    case $yn in
-        [Yy]* ) sudo pacman -S git; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+clear
 
 #add yay for aur
 while true; do
@@ -34,6 +35,8 @@ makepkg -si; break;;
     esac
 done
 
+clear
+
 #add pamac-aur appstore
 while true; do
     read -p "Do you wish to install pamac-aur? Recommended [y/n]" yn
@@ -46,9 +49,11 @@ while true; do
     esac
 done
 
+clear
+
 #install wine and it's dependencies
 while true; do
-    read -p "Do you wish to install wine [y/n]" yn
+    read -p "Do you wish to install wine? (Reccomened) [y/n]" yn
     case $yn in
         [Yy]* ) sudo pacman -S --needed wine giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
 mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
@@ -61,85 +66,188 @@ lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader l
     esac
 done
 
-#add a msg in the terminal
-echo
-echo
-echo "time for some media"
-echo
-echo
+clear
 
-#add Spotify
+#web browsers
 while true; do
-    read -p "Do you wish to install spotify? [y/n]" yn
+    read -p "Web broswer
+    1. Brave
+    2. Google Chrome
+    3. Chromium
+    4. Firefox
+    5. Vivaldi
+    0. Go to the next step
+
+    " yn
     case $yn in
-        [Yy]* ) git clone https://aur.archlinux.org/spotify.git
-        cd spotify
-        makepkg -si; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
+        [1]* ) git clone https://aur.archlinux.org/brave-bin.git
+        cd brave-bin
+        makepkg -si
+        echo ;;
+        [2]* ) git clone https://aur.archlinux.org/google-chrome.git
+        cd google-chrome
+        makepkg -si 
+        echo ;;
+        [3]* ) sudo pacman -S chromium 
+        echo ;;
+        [4]* ) sudo pacman -S firefox 
+        echo ;;
+        [5]* ) sudo pacman -S vivaldi 
+        echo ;;
+        [0]* ) break;;
+        * ) echo "invalid option";;
     esac
 done
 
-#add vlc
+clear
+
+#game launcher
 while true; do
-    read -p "Do you wish to install VLC? [y/n]" yn
+    read -p "Game Launchers
+    1. steam (Do I really have to cover this one?)
+    2. heroic (Covers Epic, GOG, and Amazon Games)
+    3. legendary (Epic Launcher)
+    4. lutirs (A libary for all your games)
+    0. Go to the next step
+
+    " yn
     case $yn in
-        [Yy]* ) sudo pacman -S vlc; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-
-#add a msg in the terminal
-echo
-echo
-echo "time for some gaming"
-echo
-echo
-
-#add Steam
-while true; do
-    read -p "Do you wish to install steam? [y/n]" yn
-    case $yn in
-        [Yy]* ) sudo pacman -S steam-native-runtime; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-#add heroic
-while true; do
-    read -p "Do you wish to install Heroic? [y/n]" yn
-    case $yn in
-        [Yy]* ) git clone https://aur.archlinux.org/heroic-games-launcher-bin.git
+        [1]* ) sudo pacman -S steam-native-runtime;;
+        [2]* ) git clone https://aur.archlinux.org/heroic-games-launcher-bin.git
         cd heroic-games-launcher-bin/
-         makepkg -si; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
+         makepkg -si;;
+        [3]* ) git clone https://aur.archlinux.org/legendary.git
+        cd legendary
+        makepkg -si;;
+        [4]* ) sudo pacman -S lutris;;
+        [0]* ) break;;
+        * ) echo "invalid option";;
     esac
 done
 
-#add a msg in the terminal
-echo
-echo
-echo "Utility Time"
-echo
-echo
+clear
 
-#add docker
+#social
 while true; do
-    read -p "Do you wish to install docker? [y/n]" yn
+    read -p "Spcial
+    1. discord
+    2. vesktop (better discord)
+    0. Go to the next step
+
+    " yn
     case $yn in
-        [Yy]* ) sudo pacman -S docker; break;;
-        [Nn]* ) break;;
+        [1]* ) git clone https://aur.archlinux.org/vesktop-bin.git
+        cd vesktop-bin
+        makepkg -si;;
+        [2]* ) sudo pacman -S discord;;
+        [0]* ) break;;
+        * ) echo "invalid option";;
+    esac
+done
+
+clear
+
+#media
+while true; do
+    read -p "Media
+    1. Spotify
+    2. vlc
+    3. jellyfin (server)
+    4. plex (server)
+    5. obs studio
+    6. krita 
+    7. gimp
+    8. inkscape
+    9. blender
+    0. Go to the next step
+
+    " yn
+    case $yn in
+        [1]* ) git clone https://aur.archlinux.org/spotify.git
+        cd spotify
+        makepkg -si;;
+        [2]* ) sudo pacman -S vlc;;
+        [3]* ) sudo pacman -S jellyfin-server
+        makepkg -si;;
+        [4]* ) git clone https://aur.archlinux.org/plex-media-server.git
+        cd plex-media-server
+        makepkg -si;;
+        [5]* ) sudo pacman -S obs-studio;;
+        [6]* ) sudo pacman -S krita;;
+        [7]* ) sudo pacman -S gimp;;
+        [8]* ) sudo pacman -S inkscape;;
+        [9]* ) sudo pacman -S blender;;
+        [0]* ) break;;
+        * ) echo "invalid option";;
+    esac
+done
+
+clear
+
+#documents
+while true; do
+    read -p "documents
+    1. libre office fresh
+    2. only office
+    3. open office
+    4. obsidian
+    5. kate
+    0. Go to the next step
+
+    " yn
+    case $yn in
+        [1]* ) sudo pacman -S libreoffice-fresh;;
+        [2]* ) git clone https://aur.archlinux.org/onlyoffice-bin.git
+        cd onlyoffice-bin
+        makepkg -si;;
+        [3]* ) git clone https://aur.archlinux.org/openoffice-bin.git
+        cd openoffice-bin
+        makepkg -si;;
+        [4]* ) sudo pacman -S obsidian;;
+        [5]* ) sudo pacman -S kate;;
+        [0]* ) break;;
+        * ) echo "invalid option";;
+    esac
+done
+
+clear
+
+#dev tools
+while true; do
+    read -p "Dev Tools
+    1. vs codium
+    2. vs code
+    3. node js
+    4. docker
+    
+    " yn
+    case $yn in
+        [1]* ) git clone https://aur.archlinux.org/vscodium-bin.git
+        cd vscodium-bin
+        makepkg -si;;
+        [2]* ) sudo pacman -S vscode;;
+        [3]* ) sudo pacman -S nodejs;;
+        [4]* ) sudo pacman -S docker;;
+        [0]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
 
+
+clear
+echo "thank you for choosing shiroe for you post install script (pis). if you have any issue or suggestions send them to me github"
+sleep 2
+echo "goodbye"
 echo 
-echo 
-echo 
-echo "Thank You for choosing Shiroe Gallue for your post install setup"
-echo 
+
+
+#template
+#while true; do
+#    read -p "message here (123)[y/n]" yn
+#    case $yn in
+#        [Yy]* ) Echo "thing was installed"; break;;
+#        [Nn]* ) break;;
+#        * ) echo "invalid option";;
+#    esac
+#done
