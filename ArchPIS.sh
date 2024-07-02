@@ -2,11 +2,11 @@
 
 #v0.1
 
-#add multilib
+#add multilib and update the packages
 while true; do
-    read -p "Do you wish enable multilib? Required to continue [y/n] " yn
+    read -p "Do you wish enable multilib? Required and will update your pc [y/n] " yn
     case $yn in
-        [Yy]* ) sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf; break;;
+        [Yy]* ) sudo sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf && sudo pacman -Syu; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
