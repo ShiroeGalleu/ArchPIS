@@ -6,7 +6,11 @@ set a defualt action with Yes or no question
 make the read me better
 add more packages and feature
 
-add Bottles, protonup-qt, protontricks
+To Add
+Bottles
+protonup-qt
+protontricks
+Davinci Resolve
 
 
 May do
